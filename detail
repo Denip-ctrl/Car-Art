@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Art - Model Details</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #030712;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Sci-fi Background Effects & Sparkling Light Animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 162, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px #00d2ff; }
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: 2px;
+            color: #e0f2fe;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.8), 0 0 20px rgba(0, 210, 255, 0.5);
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 210, 255, 0.5);
+            color: #00d2ff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 210, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Main Container */
+        .detail-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Media / Gallery Section */
+        .media-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .main-display {
+            width: 100%;
+            height: 380px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-display img, .main-display video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-list {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .thumb {
+            width: 90px;
+            height: 60px;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+        .thumb:hover, .thumb.active {
+            opacity: 1;
+            border-color: #00d2ff;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+        }
+
+        /* Info / Specification Section */
+        .info-section {
+            background: rgba(10, 15, 30, 0.85);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            border-radius: 8px;
+            padding: 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .car-title-detail {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f8fafc;
+            border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .spec-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .spec-label {
+            font-size: 11px;
+            color: #93c5fd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .spec-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .description-box {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.6;
+            background: rgba(15, 23, 42, 0.4);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #00d2ff;
+        }
+
+        /* Responsive Layout for Mobile */
+        @media (max-width: 768px) {
+            .detail-container {
+                grid-template-columns: 1fr;
+                margin: 20px 10px;
+                gap: 20px;
+            }
+
+            .main-display {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">Car Art</a>
+        <a href="index.html" class="back-btn">&#8592; Back to Collection</a>
+    </header>
+
+    <!-- Detail Content Container -->
+    <div class="detail-container">
+        
+        <!-- Left Column: Media Gallery / Video Preview -->
+        <div class="media-section">
+            <div class="main-display" id="mainDisplay">
+                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80" alt="Car View" id="activeMedia">
+            </div>
+            <div class="thumbnail-list">
+                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 1" class="thumb active" onclick="changeMedia(this)">
+                <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 2" class="thumb" onclick="changeMedia(this)">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=300&q=80" alt="Thumbnail 3" class="thumb" onclick="changeMedia(this)">
+            </div>
+        </div>
+
+        <!-- Right Column: Specifications & Details -->
+        <div class="info-section">
+            <div class="car-title-detail" id="carTitle">Crown 1998</div>
+            
+            <div class="description-box">
+                A masterclass in automotive engineering, combining classic luxury aesthetics with robust performance architecture. Built for refined comfort and ultimate road presence.
+            </div>
+
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <div class="spec-label">Vehicle Type</div>
+                    <div class="spec-value">Sedan</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Brand</div>
+                    <div class="spec-value">Toyota</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Model Series</div>
+                    <div class="spec-value">Crown S150</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Propulsion</div>
+                    <div class="spec-value">Diesel / ICE</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Year</div>
+                    <div class="spec-value">1998</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-label">Transmission</div>
+                    <div class="spec-value">Auto Transmission</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Sparkling Light Generator Background
+        const body = document.body;
+        for (let i = 0; i < 40; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.width = (Math.random() * 3 + 1) + 'px';
+            sparkle.style.height = sparkle.style.width;
+            sparkle.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+            sparkle.style.animationDelay = (Math.random() * 2) + 's';
+            body.appendChild(sparkle);
+        }
+
+        // Interactive Thumbnail Gallery Switching
+        function changeMedia(element) {
+            const activeMedia = document.getElementById('activeMedia');
+            activeMedia.src = element.src;
+
+            // Update active state class on thumbnails
+            document.querySelectorAll('.thumb').forEach(thumb => thumb.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
