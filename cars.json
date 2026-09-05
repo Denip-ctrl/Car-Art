@@ -1,0 +1,29 @@
+{
+  "crown-1998": {
+    "title": "Crown 1998",
+    "type": "Sedan",
+    "brand": "Toyota",
+    "series": "Crown S150",
+    "propulsion": "Diesel / ICE",
+    "year": "1998",
+    "transmission": "6-Speed Automatic",
+    "enginePower": "220 HP @ 5600 RPM",
+    "description": "A masterclass in automotive engineering, combining classic luxury aesthetics with robust performance architecture.",
+    "gallery": [
+      {
+        "url": "images/crown-1998-1.jpg",
+        "source": "AI Generated (Car Art Studio)"
+      },
+      {
+        "url": "images/crown-1998-2.jpg",
+        "source": "Pixabay (User: CarPix)"
+      },
+      {
+        "url": "images/crown-1998-3.jpg",
+        "source": "Unsplash (Creator: Alex Suprun)"
+      }
+    ],
+    "youtubeVideoId": "YOUR_VIDEO_ID",
+    "reviewText": "The Toyota Crown 1998 represents an era where absolute comfort met bulletproof reliability. Outfitted with a sophisticated 6-speed automatic transmission and a robust engine churning out 220 horsepower, it delivers a uniquely planted, smooth ride quality..."
+  }
+}
